@@ -11,3 +11,5 @@ Download the repo
 run ```npm install inquirer```
 
 run the app with ```npm start```
+
+## Video Demonstration
