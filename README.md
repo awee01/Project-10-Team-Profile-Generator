@@ -14,4 +14,6 @@ run ```npm install inquirer```
 
 run the app with ```npm start```
 
+Follow prompts to create index file
+
 ## Video Demonstration
