@@ -17,3 +17,10 @@ run the app with ```npm start```
 Follow prompts to create index file
 
 ## Video Demonstration
+
+https://watch.screencastify.com/v/9cSaqTSpqKMISBwDSt8G
+
+
+
+![image](https://user-images.githubusercontent.com/85651950/142716118-a81507a3-7a96-45cb-a358-025851d25dd9.png)
+
