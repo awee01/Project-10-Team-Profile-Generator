@@ -1,16 +1,15 @@
 const inquirer = require('inquirer');
 const fs = require("fs");
-
+const generate = require('./src/generate.js');
 
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const generate = require('./src/generate.js');
 
-const team = [];
+let totalarray = [];
 
-function promptManager() {
+function promptInitial() {
 
   console.log(`
   ===============
@@ -43,7 +42,7 @@ function promptManager() {
   
   .then(answers => {
     const manager = new Manager(answers.ManagerName, answers.ManagerID, answers.ManagerEmail, answers.ManagerOfficeNumber);
-    team.push(manager);
+    totalarray.push(manager);
     promptaddMenu();
   })
 
@@ -57,28 +56,27 @@ function promptManager() {
     ===============
     `);
 
-    return inquirer.prompt([
-      {
-          type: 'list',
-          name: 'menu',
-          message: 'Select an Option',
-          choices: ['Add an Intern to my Team', 'Add an Engineer to my Team', 'Generate my Team']
+    return inquirer.prompt([{
+        type: 'list',
+        name: 'menu',
+        message: 'Select an Option',
+        choices: ['Add an Intern to my Team', 'Add an Engineer to my Team', 'Generate my Team']
       }])
       .then(data => {
-          switch (data.menu) {
-              case "Add an Intern to my Team":
-                  promptIntern();
-                  break;
+        switch (data.menu) {
+          case "Add an Intern to my Team":
+            promptIntern();
+            break;
 
-              case "Add an Engineer to my Team":
-                  promptEngineer();
-                  break;
+          case "Add an Engineer to my Team":
+            promptEngineer();
+            break;
 
-              case "Generate my Team":
-                  generateTeam();
-          }
+          case "Generate my Team":
+            generateTeam();
+        }
       });
-  };
+    };
 
   function promptEngineer() {
 
@@ -113,7 +111,8 @@ function promptManager() {
 
   .then(answers => {
     const engineer = new Engineer(answers.EngineerName, answers.EngineerID, answers.EngineerEmail, answers.EngineerGitHub);
-    team.push(engineer);
+
+    totalarray.push(engineer);
     promptaddMenu();
   })
 
@@ -153,22 +152,26 @@ function promptManager() {
 
   .then(answers => {
     const intern = new Intern(answers.InternName, answers.InternID, answers.InternEmail, answers.InternSchool);
-    team.push(intern);
+    
+    totalarray.push(intern);
+
     promptaddMenu();
+
   })
 
 
   };
 
+  
   function generateTeam() {
+ 
     console.log(`
     ===============
-    Your team has been Generated, check index.html in /dist/
+    Your team file has been generated, check index.html in /dist/
     ===============
     `);
 
-
-       fs.writeFileSync('./dist/index.html', generate(team));
+       fs.writeFileSync('./dist/index.html', generate(totalarray));
 }
 
-promptManager();
+promptInitial();

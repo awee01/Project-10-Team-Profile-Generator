@@ -1,0 +1,33 @@
+header h1 {
+   
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+    padding: 10px;
+}
+
+header{
+
+    background-color: rgb(68, 110, 110);
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    padding: 20px;
+}
+
+.card{
+
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    padding: 20px;
+
+
+    
+
+}
+

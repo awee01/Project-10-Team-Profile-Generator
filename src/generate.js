@@ -1,92 +1,60 @@
 
 
-function generatemanagerblock(team)
+function generate(employee)
 {
-    console.log(team)
 
-    return  `    
-    <div class="card" style="width: 18rem;">
+ var field = "";
 
-    <div class="card-header">
-    ${team[0].name}
-    </div>
-
-    <div>
-    ID: ${team[0].id}
-    <br>
-    Email: ${team[0].email}
-    <br>
-    Office: ${team[0].office}
-    </div>    
-    
-    </div>
-    `
-
-}
-
-function generateTeam(team) {
-
-const generateIntern = intern =>
-
-{
-    return  `    
-    <div class="card" style="width: 18rem;">
-
-    <div class="card-header">
-    ${intern.name}
-    </div>
-
-    <div>
-    ID: ${intern.id}
-    <br>
-    Email: ${intern.email}
-    <br>
-    School: ${intern.school}
-    </div>    
-    
-    </div>
-    `
+ if(employee.getRole()==="Manager"){
+     field = `Office Number: ${employee.office}` 
+} else if (employee.getRole()==="Intern"){
+    field = `School: ${employee.school}` 
+} else if (employee.getRole()==="Engineer"){
+    field = `Github: ${employee.github}` 
 }
 
 
-const generateEngineer = engineer =>
-
-{
-    return  `    
-    <div class="card" style="width: 18rem;">
-
-    <div class="card-header">
-    ${engineer.name}
-    </div>
-
-    <div>
-    ID: ${engineer.id}
-    <br>
-    Email: ${engineer.email}
-    <br>
-    Github: ${engineer.github}
-    </div>    
-    
-    </div>
-    `
+ return`
+ <div class="card" style="width: 18rem;">
+ <ul class="list-group list-group-flush">
+ <h3 class="card-title">${employee.name}</h3>
+ <h4>${employee.getRole()}</h4>
+   <li class="list-group-item">Id: ${employee.id}</li>
+   <li class="list-group-item">Email: ${employee.email}</li>
+   <li class="list-group-item">${field}</li>
+ </ul>
+</div>
+ `
 
 }
-
-for (i = 0; i < team.length; i++){
-
-
-    
-}
-
-
-
-}
-
 
 
 
 
 module.exports = team=> {
+
+    var card = ""
+
+    for (let i = 0; i < team.length; i++) 
+    {
+    
+      if (team[i].getRole()==="Manager"){
+
+        card = card+generate(team[i])
+      }
+      else if (team[i].getRole()==="Engineer"){
+
+        card = card+generate(team[i])
+      }
+      else if (team[i].getRole()==="Intern"){
+
+        card = card+generate(team[i])
+      }
+      
+      
+      
+        
+    }
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -94,7 +62,7 @@ module.exports = team=> {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-            <link rel="stylesheet" href="../style.css" />
+            <link rel="stylesheet" href="../src/style.css" />
             <title>Team Profile</title>
         </head>
         <body>
@@ -102,11 +70,12 @@ module.exports = team=> {
             <h1>My Team</h1>
             </header>
 
-            ${generatemanagerblock(team)}
+           
+            <main>
 
-            ${generateteam(team)}
+            ${card}
 
-
+            </main>
 
 
             
